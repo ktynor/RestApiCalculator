@@ -1,5 +1,6 @@
 package com.example.rest.controller;
 
+import com.example.rest.exception.UnsuportedMathOperationException;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
@@ -9,9 +10,9 @@ import org.springframework.web.bind.annotation.RestController;
 public class MathController {
     @RequestMapping(value = "/sum/{numberOne}/{numberTwo}", method = RequestMethod.GET)
     public Double sum(@PathVariable("numberOne") String numberOne,
-                      @PathVariable("numberTwo") String numberTwo) throws Exception {
+                      @PathVariable("numberTwo") String numberTwo) throws UnsuportedMathOperationException {
         if (!isNumeric(numberOne) || !isNumeric(numberTwo)) {
-            throw new Exception();
+            throw new UnsuportedMathOperationException("Please set a numeric value");
         }
         return convertToDouble(numberOne) + convertToDouble(numberTwo);
     }
