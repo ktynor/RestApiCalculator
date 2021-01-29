@@ -21,6 +21,10 @@ public class PersonServices {
         return persons;
     }
 
+    public Person create(Person person) {
+        return person;
+    }
+
     public Person findById(String id) { // ERROR! creates and returns always a new person!
         // TODO implement a correct method
         Person person = new Person();
