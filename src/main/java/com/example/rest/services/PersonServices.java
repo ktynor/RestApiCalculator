@@ -25,6 +25,10 @@ public class PersonServices {
         return person;
     }
 
+public Person update(Person person) {
+        return person;
+    }
+
     public Person findById(String id) { // ERROR! creates and returns always a new person!
         // TODO implement a correct method
         Person person = new Person();
