@@ -1,57 +1,45 @@
 package com.example.rest.services;
 
+import com.example.rest.exception.ResourceNotFoundException;
 import com.example.rest.model.Person;
+import com.example.rest.repository.PersonRepository;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
-import java.util.ArrayList;
 import java.util.List;
-import java.util.concurrent.atomic.AtomicLong;
 
 @Service
 public class PersonServices {
 
-    private final AtomicLong counter = new AtomicLong();
-
-    public List<Person> findAll() {
-        List<Person> persons = new ArrayList<>();
-        for (int i = 0; i < 8; i++) {
-            Person person = mockPerson(i);
-            persons.add(person);
-        }
-        return persons;
-    }
+    @Autowired
+    PersonRepository repository;
 
     public Person create(Person person) {
-        return person;
+        return repository.save(person);
     }
 
-    public void delete(String id) {
+    public List<Person> findAll() {
+        return repository.findAll();
+    }
 
+    public Person findById(Long id) {
+        return repository.findById(id)
+                .orElseThrow(() -> new ResourceNotFoundException("No records found for this ID"));
     }
 
     public Person update(Person person) {
-        return person;
+        Person entity = repository.findById(person.getId())
+                .orElseThrow(() -> new ResourceNotFoundException("No records found for this ID"));
+        entity.setFirstName(person.getFirstName());
+        entity.setFirstName(person.getLastName());
+        entity.setFirstName(person.getAddress());
+        entity.setFirstName(person.getGender());
+        return repository.save(entity);
     }
 
-    public Person findById(String id) { // ERROR! creates and returns always a new person!
-        // TODO implement a correct method
-        Person person = new Person();
-        person.setId(counter.incrementAndGet());
-        person.setFirstName("Leandro");
-        person.setLastName("Costa");
-        person.setAddress("Uberlândia - Minas Gerais -Brasil");
-        person.setGender("Male");
-        return person;
+    public void delete(Long id) {
+        Person entity = repository.findById(id)
+                .orElseThrow(() -> new ResourceNotFoundException("No records found for this ID"));
+        repository.delete(entity);
     }
-
-    private Person mockPerson(int i) {
-        Person person = new Person();
-        person.setId(counter.incrementAndGet());
-        person.setFirstName("Leandro" + i);
-        person.setLastName("Costa" + i);
-        person.setAddress("Uberlândia - Minas Gerais -Brasil" + i);
-        person.setGender("Male");
-        return person;
-    }
-
 }
