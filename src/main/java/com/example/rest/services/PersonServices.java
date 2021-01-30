@@ -25,7 +25,11 @@ public class PersonServices {
         return person;
     }
 
-public Person update(Person person) {
+    public void delete(String id) {
+
+    }
+
+    public Person update(Person person) {
         return person;
     }
 

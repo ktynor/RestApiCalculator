@@ -45,4 +45,10 @@ public class PersonController {
         return services.create(person);
     }
 
+    @RequestMapping(value = "/{id}",
+            method = RequestMethod.DELETE)
+    public void delete(@PathVariable("id") String id) {
+        services.delete(id);
+    }
+
 }
