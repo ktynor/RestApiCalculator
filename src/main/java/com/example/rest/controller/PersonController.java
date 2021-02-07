@@ -15,7 +15,7 @@ public class PersonController {
     @Autowired
     private PersonServices services;
 
-    @GetMapping // TODO solve errors in personServices
+    @GetMapping
     public List<PersonVO> findAll() {
         return services.findAll();
     }
