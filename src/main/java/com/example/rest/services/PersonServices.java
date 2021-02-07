@@ -1,7 +1,7 @@
 package com.example.rest.services;
 
+import com.example.rest.data.model.Person;
 import com.example.rest.exception.ResourceNotFoundException;
-import com.example.rest.model.Person;
 import com.example.rest.repository.PersonRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
