@@ -1,6 +1,7 @@
 package com.example.rest.services;
 
 import com.example.rest.converter.DozerConverter;
+import com.example.rest.converter.custom.PersonConverter;
 import com.example.rest.data.model.Person;
 import com.example.rest.data.vo.PersonVO;
 import com.example.rest.data.vo.v2.PersonVOV2;
@@ -18,6 +19,9 @@ public class PersonServices {
     @Autowired
     PersonRepository repository;
 
+    @Autowired
+    PersonConverter converter;
+
     public PersonVO create(PersonVO person) {
         var entity = DozerConverter.parseObject(person, Person.class);
         var vo = DozerConverter.parseObject(repository.save(entity), PersonVO.class);
@@ -25,8 +29,8 @@ public class PersonServices {
     }
 
     public PersonVOV2 createV2(PersonVOV2 person) {
-        var entity = DozerConverter.parseObject(person, Person.class);
-        var vo = DozerConverter.parseObject(repository.save(entity), PersonVOV2.class);
+        var entity = converter.convertVOToEntity(person);
+        var vo = converter.convertEntityToVO(repository.save(entity));
         return vo;
     }
 
