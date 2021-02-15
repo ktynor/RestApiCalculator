@@ -3,6 +3,7 @@ package com.example.rest.services;
 import com.example.rest.converter.DozerConverter;
 import com.example.rest.data.model.Person;
 import com.example.rest.data.vo.PersonVO;
+import com.example.rest.data.vo.v2.PersonVOV2;
 import com.example.rest.exception.ResourceNotFoundException;
 import com.example.rest.repository.PersonRepository;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -20,6 +21,12 @@ public class PersonServices {
     public PersonVO create(PersonVO person) {
         var entity = DozerConverter.parseObject(person, Person.class);
         var vo = DozerConverter.parseObject(repository.save(entity), PersonVO.class);
+        return vo;
+    }
+
+    public PersonVOV2 createV2(PersonVOV2 person) {
+        var entity = DozerConverter.parseObject(person, Person.class);
+        var vo = DozerConverter.parseObject(repository.save(entity), PersonVOV2.class);
         return vo;
     }
 
