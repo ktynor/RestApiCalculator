@@ -1,7 +1,7 @@
 package com.example.rest.converter.mocks;
 
 import com.example.rest.data.model.Person;
-import com.example.rest.data.vo.PersonVO;
+import com.example.rest.data.vo.v1.PersonVO;
 
 import java.util.ArrayList;
 import java.util.List;

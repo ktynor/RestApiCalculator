@@ -3,7 +3,7 @@ package com.example.rest.services;
 import com.example.rest.converter.DozerConverter;
 import com.example.rest.converter.custom.PersonConverter;
 import com.example.rest.data.model.Person;
-import com.example.rest.data.vo.PersonVO;
+import com.example.rest.data.vo.v1.PersonVO;
 import com.example.rest.data.vo.v2.PersonVOV2;
 import com.example.rest.exception.ResourceNotFoundException;
 import com.example.rest.repository.PersonRepository;
